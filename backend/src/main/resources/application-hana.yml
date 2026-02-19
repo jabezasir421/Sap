@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    # Provide real SAP HANA JDBC settings in your environment.
+    url: ${HANA_DB_URL:jdbc:sap://localhost:39015/?encrypt=true&validateCertificate=false}
+    username: ${HANA_DB_USERNAME:SYSTEM}
+    password: ${HANA_DB_PASSWORD:manager}
+    driver-class-name: com.sap.db.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: false

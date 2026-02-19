@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: sap-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/sap?sslmode=require}
+    username: ${DB_USERNAME:sap}
+    password: ${DB_PASSWORD:sap}
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${OAUTH_ISSUER_URI:http://localhost:8081/realms/sap}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+server:
+  ssl:
+    enabled: ${TLS_ENABLED:false}
+    key-store: ${TLS_KEYSTORE:}
+    key-store-password: ${TLS_KEYSTORE_PASSWORD:}
+    key-store-type: ${TLS_KEYSTORE_TYPE:PKCS12}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  multitenancy:
+    allow-header-tenant: ${ALLOW_HEADER_TENANT:true}
+  erp:
+    realtime-enabled: true
+  security:
+    encryption-at-rest: true
+    disaster-recovery-enabled: true
